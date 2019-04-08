@@ -1,4 +1,5 @@
-const HashMap = require('./HashMap');
+const HashMap       = require('./HashMap');
+const BetterHashMap = require('./BetterHashMap');
 
 const main = function () {
 
@@ -68,7 +69,7 @@ function isPalindrome(str) {
   if (unmatchCount > allowedChars) {
     return false;
   }
-    
+
   return true;
 }
 
@@ -96,7 +97,7 @@ function flightTimeMovieCal(flightTime, movieLengthList) {
       secondMovie = flightTime - movieLengthList[i]
       moviesLength.get(secondMovie)
       return true
-    } 
+    }
     catch {
     moviesLength.set(movieLengthList[i], '')
     }
@@ -105,3 +106,18 @@ function flightTimeMovieCal(flightTime, movieLengthList) {
 }
 
 //console.log(flightTimeMovieCal(100, [120, 90]));
+
+
+
+// Testing BetterHashMap
+
+BetterHashMap.MAX_LOAD_RATIO = 0.5;
+BetterHashMap.SIZE_RATIO     = 3;
+
+let tMap = new BetterHashMap(1);
+tMap.set('east', 'foo');
+tMap.set('teas', 'bar');
+tMap.set('eats', 'buzz');
+tMap.set('xxxxxxx', 'zzzzzzzzz');
+
+console.log(tMap);
