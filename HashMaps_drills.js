@@ -32,9 +32,76 @@ const main = function () {
   // when the 5th item is added capacity is rez=sized to 24
 };
 
+function removeDuplicates(str) {
+  let strMap = new Map();
+  let outputStr = '';
+  for (let i = 0; i < str.length; i++) {
+    strMap.set(1, str[i]);
+  }
+  console.log(strMap);
+  strMap.forEach((letter) => {
+    if (!outputStr.includes(letter)) {
+      outputStr += letter;
+    }
+  })
+  return outputStr;
+}
+
+function isPalindrome(str) {
+  let strMap = new Map();
+  for (let i = 0; i < str.length; i++) {
+    if (!strMap.has(str[i])) {
+      strMap.set(str[i], 'unmatched')
+    } else {
+      strMap.set(str[i], 'matched')
+    }
+  }
+
+  const allowedChars = str.length % 2;
+  let unmatchCount = 0;
+  strMap.forEach(value => {
+    if (value === 'unmatched') {
+      unmatchCount++;
+    }
+  })
+    // if more than one character is unmatched return false
+  if (unmatchCount > allowedChars) {
+    return false;
+  }
+    
+  return true;
+}
+
+
+function drillsMain() {
+  //console.log(removeDuplicates("google"));
+  //console.log(isPalindrome("acecarr"));
+}
+drillsMain();
+
 // main();
 
 
 // WhatDoesThisDo
 // This code demonstrates that multiple set()'s to the same key will overwrite
 // any previously set() values
+
+// interview question
+function flightTimeMovieCal(flightTime, movieLengthList) {
+  let moviesLength = new Map();
+  let secondMovie = 0;
+
+  for (let i = 0; i < movieLengthList.length; i++) {
+    try {
+      secondMovie = flightTime - movieLengthList[i]
+      moviesLength.get(secondMovie)
+      return true
+    } 
+    catch {
+    moviesLength.set(movieLengthList[i], '')
+    }
+  }
+  return false;
+}
+
+//console.log(flightTimeMovieCal(100, [120, 90]));
