@@ -32,4 +32,9 @@ const main = function () {
   // when the 5th item is added capacity is rez=sized to 24
 };
 
-main();
+// main();
+
+
+// WhatDoesThisDo
+// This code demonstrates that multiple set()'s to the same key will overwrite
+// any previously set() values
