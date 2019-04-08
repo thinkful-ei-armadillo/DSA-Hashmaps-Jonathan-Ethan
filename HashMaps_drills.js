@@ -108,6 +108,35 @@ function flightTimeMovieCal(flightTime, movieLengthList) {
 //console.log(flightTimeMovieCal(100, [120, 90]));
 
 
+// Anagram grouping
+
+
+const groupAnagrams = function (words) {
+
+  const obj = {};
+
+  words.forEach((word) => {
+
+    let hash = 0;
+
+    for (let i = 0; i < word.length; i++) {
+      hash += word.charCodeAt(i);
+    }
+
+
+    if (obj[hash]) {
+      obj[hash].push(word);
+    } else {
+      obj[hash] = [ word ];
+    }
+
+  });
+
+  return Object.values(obj);
+}
+
+console.log(groupAnagrams(['east', 'cars', 'acre', 'arcs', 'teas', 'eats', 'race']))
+
 
 // Testing BetterHashMap
 
@@ -120,4 +149,4 @@ tMap.set('teas', 'bar');
 tMap.set('eats', 'buzz');
 tMap.set('xxxxxxx', 'zzzzzzzzz');
 
-console.log(tMap);
+// console.log(tMap);
