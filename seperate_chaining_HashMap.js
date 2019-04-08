@@ -48,16 +48,15 @@ class Chain {
 }
 
 class BetterHashMap {
-
-  constructor() {
+  constructor(initialCapacity=8) {
     this.length = 0;
     this._hashTable = [];
-    
+    this._capacity = initialCapacity;
   }
 
   get(key) {
     const hash = BetterHashMap._hashString(key);
-    const index = hash % this.length;
+    const index = hash % this._capacity;
     const chain = this._hashTable[index];
 
     return chain.get(key);
@@ -65,20 +64,19 @@ class BetterHashMap {
 
   set(key, value) {
     //Find the slot where this key should be in
-    
+
     //const index = this._findSlot(key);
     const hash = BetterHashMap._hashString(key);
-    
-    const index = hash % this.length;
-    console.log(hash, this.length)
-    if (!this._hashTable[index].head) {
+
+    let index = hash % this._capacity;
+  
+    if (this._hashTable[index] === undefined) {
       this._hashTable[index] = new Chain();
     }
-    this._hashTable[index].insert({ key: key, value: value });
 
-    if (!this._hashTable[index]) {
-      this.length++;
-    }
+    this._hashTable[index].insert({ key: key, value: value });
+    this.length++;
+
     this._hashTable[index] = {
       key,
       value,
@@ -100,14 +98,13 @@ class BetterHashMap {
 
   _findSlot(key) {
     const hash = BetterHashMap._hashString(key);
-    const index = hash % this.length;
+    const index = hash % this._capacity;
 
     let chain = this._hashTable[index];
     // case for there is collision if key exists head is new item, old head is next property of new head
     if (chain !== undefined) {
       return chain.get(key);
     }
-    
   }
 
   static _hashString(string) {
@@ -128,11 +125,10 @@ class BetterHashMap {
 
 function test() {
   let tMap = new BetterHashMap();
-  tMap.set('test1', 'foo');
-  tMap.set('test2', 'bar');
-  tMap.set('test3', 'buzz');
-  //console.log(JSON.stringify(testList, null, 2));
-  //console.log(tMap);
+  tMap.set('east', 'foo');
+  tMap.set('teas', 'bar');
+  tMap.set('eats', 'buzz');
+  console.log(tMap);
 }
 test();
 module.exports = BetterHashMap;
